@@ -35,17 +35,23 @@
 
 ; ------------------------------------------------------------------------------
 (define (export-retina-resolution-image-as-ios-images inImage inDrawable inPath inFilename inImageExportOption)
-    ; Image export: Retina
+    ; Image export: Retina - 3x
+    (if (or (= 0 inImageExportOption) (= 1 inImageExportOption))
+        (let* (
+            (filename (string-append inFilename "@3x.png")))
+            (export-as-ios-image inImage inDrawable inPath filename (car (gimp-image-width inImage)) (car (gimp-image-height inImage)))))
+
+    ; the old retina - 2x
     (if (or (= 0 inImageExportOption) (= 1 inImageExportOption))
         (let* (
             (filename (string-append inFilename "@2x.png")))
-            (export-as-ios-image inImage inDrawable inPath filename (car (gimp-image-width inImage)) (car (gimp-image-height inImage)))))
-
+            (export-as-ios-image inImage inDrawable inPath filename (round (/ (car (gimp-image-width inImage)) 2)) (round (/ (car (gimp-image-height inImage)) 2)))))
+            
     ; Image export: Non-Retina
     (if (or (= 0 inImageExportOption) (= 2 inImageExportOption))
         (let* (
             (filename (string-append inFilename ".png")))
-            (export-as-ios-image inImage inDrawable inPath filename (round (/ (car (gimp-image-width inImage)) 2)) (round (/ (car (gimp-image-height inImage)) 2))))))
+            (export-as-ios-image inImage inDrawable inPath filename (round (/ (car (gimp-image-width inImage)) 3)) (round (/ (car (gimp-image-height inImage)) 3))))))
      
 ; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 (script-fu-register
