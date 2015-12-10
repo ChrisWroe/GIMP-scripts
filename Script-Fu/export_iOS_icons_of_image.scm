@@ -163,6 +163,8 @@
             (export-as-ios-image inImage inDrawable inPath "Icon-Small.png" 29 29)))
     (if (= 1 iniPadIcons)
         (begin
+            (export-as-ios-image inImage inDrawable inPath "Icon-83@2x.png" 167 167)
+            (export-as-ios-image inImage inDrawable inPath "Icon-83.png" 85 83)
             (export-as-ios-image inImage inDrawable inPath "Icon-72@2x.png" 144 144)
             (export-as-ios-image inImage inDrawable inPath "Icon-72.png" 72 72)
             (export-as-ios-image inImage inDrawable inPath "Icon-Small-50@2x.png" 100 100)
